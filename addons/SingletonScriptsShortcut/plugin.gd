@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 var editorInterface = get_editor_interface()
@@ -8,9 +8,9 @@ const sceneShortcut = preload("res://addons/SingletonScriptsShortcut/shortcut.ts
 var shortcuts
 
 func _enter_tree():
-	shortcuts = sceneShortcut.instance()
-	shortcuts.connect("pressed", self, "on_buttonpressed")
-	shortcuts.get_popup().connect("index_pressed", self, "index_pressed")
+	shortcuts = sceneShortcut.instantiate()
+	shortcuts.connect("pressed", Callable(self, "on_buttonpressed"))
+	shortcuts.get_popup().connect("index_pressed", Callable(self, "index_pressed"))
 	scriptEditorMenu.add_child(shortcuts)
 	scriptEditorMenu.move_child(shortcuts,3)
 	update_shortcuts()
